@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:20px">
+    <a class="navbar-brand" style="font-size: 25px;
+    color: green;
+    font-weight: bold;
+    border: 6px solid green;
+    padding: 10px;" routerLink="/">Portfolio Information</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/personal">Personal Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/education">Education</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/workexp">Professional Experience</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/academicexp">Academic Experience</a>
+        </li>
+        <li class="nav-item" *ngIf="!userthere">
+            <button class="btn btn-success" (click)="create()">New Profile</button>
+        </li>
+        <li class="nav-item" *ngIf="userthere">
+            <button class="btn btn-success" (click)="logout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  

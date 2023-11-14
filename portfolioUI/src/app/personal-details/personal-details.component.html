@@ -1,0 +1,13 @@
+<div style="text-align: center; margin-top:20px;border: 6px solid green; margin:0px 20px">
+    <h2 style="font-size: 25px;
+    color: green;
+    font-weight: bold;
+    
+    padding: 10px;">Personal Details</h2>
+<h1>{{usermodel?.Uname}}</h1>
+<div style="display: inline-flex;"><h3>{{usermodel?.emailID}}</h3>
+<h3>{{usermodel?.contactNO}}</h3>
+<h3>{{usermodel?.address}}</h3></div>
+<p>{{usermodel?.profileDescription}}</p>
+<div style="display:inline-flex"><h5 style="color: green;">Skills:</h5><div style="padding-left:10px" *ngFor="let item of usermodel?.Skills"><h4>{{item}}</h4> </div><div>
+</div>

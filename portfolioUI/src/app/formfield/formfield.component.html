@@ -1,0 +1,332 @@
+<div style="border: 6px solid green; margin-top:10px" *ngIf="index==1" class="details">
+    <h2 style="font-size: 25px;
+    color: green;
+    font-weight: bold;
+    
+    padding: 10px;">Personal Details</h2>
+    <form>
+    <div class="form-group">
+      <label for="inputName">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="Profile.name"
+        name="name"
+        id="name"
+        placeholder="Enter Your Your Full Name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="inputEmail">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="Profile.emailID"
+        name="emailID"
+        id="emailID"
+        placeholder="Enter your email"
+      />
+    </div>
+    <div class="form-group">
+        <label for="contactNo">Contact Number:</label>
+        <input
+          type="tel"
+          maxlength="13"
+          class="form-control"
+          [(ngModel)]="Profile.contactNo"
+          name="contactNo"
+          id="contactNo"
+          placeholder="Contact Number(country Code)"
+        />
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea type="text"
+        class="form-control"
+        name="address"
+        [(ngModel)]="Profile.address"
+        id="address"
+        placeholder="Address" rows="3" cols="20" maxlength="50"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea type="text"
+        class="form-control"
+        name="description"
+        [(ngModel)]="Profile.description"
+        id="description"
+        placeholder="Description" rows="4" cols="50" maxlength="500"></textarea>
+
+      </div>
+      <div class="form-group">
+        <label for="contactNo">Skills:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="skill"
+          name="skills"
+          id="skills"
+          placeholder="Skills"
+          (keyup.enter)="onEnter($event)"
+        />
+      </div>
+      <div style="text-align: center;
+      margin: 0px 30px;">
+      <div style="padding:5px;background-color: antiquewhite;margin:5px;" *ngFor="let item of skills;let J=index">
+        <h5>{{item}}</h5>
+        <p style="color: red; font-size:10px"(click)="this.skills.splice(J,1)">Remove</p></div>
+   </div>
+  </form>
+  <button type="submit" class="btn btn-success" (click)="NextPage()">Next</button></div>
+  <div style="border: 6px solid green; margin-top:10px" *ngIf="index==2"class="details">
+    <h2 style="font-size: 25px;
+    color: green;
+    font-weight: bold;
+    padding: 10px;">Education Details</h2>
+    <div *ngIf="educationExperience.length>0">
+    <div *ngFor="let item of educationExperience; let in=index">
+    <div style="background-color: #b3afaf69;
+    display: inline-flex;
+    width: 95%;
+    padding: 10px;
+    margin-left: 16px;
+    text-align: center;
+    justify-content: center;
+    text-indent: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;">
+        <h5>{{item.degree}}</h5>
+        <h5>{{item.major}}</h5>
+        <h5>{{item.collegeName}}</h5>
+        <h5>{{item.graduationYear}}</h5>
+        <p style="color: red;"(click)="this.educationExperience.splice(in,1)">Remove</p>
+    </div>
+    </div>
+</div>
+    <form >
+    <div class="form-group">
+      <label for="degree">Degree:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="degree"
+        name="degree"
+        [(ngModel)]="education.degree"
+        placeholder="Degree Earned"
+      />
+    </div>
+    <div class="form-group">
+      <label for="major">Major:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="major"
+        name="major"
+        [(ngModel)]="education.major"
+        placeholder="Major"
+      />
+    </div>
+    <div class="form-group">
+        <label for="collegeName">College/School Name:</label>
+        <input
+          type="text"
+          maxlength="13"
+          class="form-control"
+          [(ngModel)]="education.collegeName"
+         name="collegeName" 
+         placeholder="College Name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="graduationYear">Graduation Year:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="education.graduationYear"
+          name="graduationYear" 
+          id="graduationYear"
+          placeholder="Graduation Year"
+        />
+      </div>
+      <button type="button" style="margin-top:0px;margin-bottom: 0px;"class="btn btn-success" (click)="AddEducation()">ADD</button>
+    </form>
+      <div style="display:flex">
+      <button type="submit" style="background: white;color: red;" (click)="backPage()"class="btn btn-success">Back</button>
+    <button type="submit" class="btn btn-success" (click)="NextPage()">Next</button>
+    </div>
+  </div>
+  <div style="border: 6px solid green; margin-top:10px" *ngIf="index==3" class="details">
+    <h2 style="font-size: 25px;
+    color: green;
+    font-weight: bold;
+    padding: 10px;">Work Experience</h2>
+    <div *ngIf="workExperience.length>0">
+    <div *ngFor="let item of workExperience; let in=index">
+    <div style="background-color: #b3afaf69;
+    display: inline-flex;
+    width: 95%;
+    padding: 10px;
+    margin-left: 16px;
+    text-align: center;
+    justify-content: center;
+    text-indent: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;">
+        <h5>{{item.ProjectName}}</h5>
+        <h5>{{item.CompanyName}}</h5>
+        <h5>{{item.designation}}</h5>
+        <p style="color: red;"(click)="this.workExperience.splice(in,1)">Remove</p>
+
+        <!-- <h5>{{item.graduationYear}}</h5> -->
+    </div>
+    </div>
+</div>
+    <form >
+    <div class="form-group">
+      <label for="ProjectName">Project Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ProjectName"
+        name="ProjectName"
+        [(ngModel)]="workexp.ProjectName"
+        placeholder="Project Name"/>
+    </div>
+    <div class="form-group">
+        <label for="ProjectDescription">Project Description:</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="ProjectDescription"
+          name="ProjectDescription"
+          [(ngModel)]="workexp.ProjectDescription"
+          placeholder="Project Description"
+         rows="4" cols="50" maxlength="500"
+        ></textarea>
+      </div>
+    <div class="form-group">
+      <label for="CompanyName">Company Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="CompanyName"
+        name="CompanyName"
+        [(ngModel)]="workexp.CompanyName"
+        placeholder="CompanyName"
+      />
+    </div>
+    <div class="form-group">
+        <label for="designation">Designation:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="workexp.designation"
+         name="designation" 
+         placeholder="Designation"
+        />
+      </div>
+      <div class="form-group">
+        <label for="duration">Project Year:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="workexp.duration"
+          name="duration" 
+          id="duration"
+          placeholder="Project Year"
+        />
+      </div>
+      <button type="button" style="margin-top:0px;margin-bottom: 0px;"class="btn btn-success" (click)="AddWorkExp()">ADD</button>
+    </form>
+      <div style="display:flex">
+      <button type="submit" style="background: white;color: red;" (click)="backPage()"class="btn btn-success">Back</button>
+    <button type="submit" class="btn btn-success" (click)="NextPage()">Next</button>
+    </div>
+  </div>
+  <div style="border: 6px solid green; margin-top:10px" *ngIf="index==4" class="details">
+    <h2 style="font-size: 25px;
+    color: green;
+    font-weight: bold;
+    padding: 10px;">Academic Experience</h2>
+    <div *ngIf="academicExperience.length>0">
+    <div *ngFor="let item of academicExperience; let in=index">
+    <div style="background-color: #b3afaf69;
+    display: inline-flex;
+    width: 95%;
+    padding: 10px;
+    margin-left: 16px;
+    text-align: center;
+    justify-content: center;
+    text-indent: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;">
+        <h5>{{item.ProjectName}}</h5>
+        <h5>{{item.CompanyName}}</h5>
+        <h5>{{item.designation}}</h5>
+        <p style="color: red;"(click)="this.academicExperience.splice(in,1)">Remove</p>
+        <!-- <h5>{{item.graduationYear}}</h5> -->
+    </div>
+    </div>
+</div>
+    <form >
+    <div class="form-group">
+      <label for="ProjectName">Project Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ProjectName"
+        name="ProjectName"
+        [(ngModel)]="workexp.ProjectName"
+        placeholder="Project Name"/>
+    </div>
+    <div class="form-group">
+        <label for="ProjectDescription">Project Description:</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="ProjectDescription"
+          name="ProjectDescription"
+          [(ngModel)]="workexp.ProjectDescription"
+          placeholder="Project Description"
+          rows="4" cols="50" maxlength="500"
+        ></textarea>
+      </div>
+    <div class="form-group">
+      <label for="CompanyName">College Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="CompanyName"
+        name="CompanyName"
+        [(ngModel)]="workexp.CompanyName"
+        placeholder="College Name"
+      />
+    </div>
+    <div class="form-group">
+        <label for="designation">Role:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="workexp.designation"
+         name="designation" 
+         placeholder="Role"
+        />
+      </div>
+      <div class="form-group">
+        <label for="duration">Project Year:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="workexp.duration"
+          name="duration" 
+          id="duration"
+          placeholder="Project Year"
+        />
+      </div>
+      <button type="button" style="margin-top:0px;margin-bottom: 0px;"class="btn btn-success" (click)="AddAcademicExp()">ADD</button>
+    </form>
+      <div style="display:flex">
+      <button type="submit" style="background: white;color: red;" (click)="backPage()"class="btn btn-success">Back</button>
+    <button type="submit" class="btn btn-success" (click)="finalSubmit()">Submit</button>
+    </div>
+  </div>

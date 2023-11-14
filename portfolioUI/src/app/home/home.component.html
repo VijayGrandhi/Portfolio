@@ -1,0 +1,27 @@
+<div  class="details"><form>
+    <div class="form-group">
+      <label for="inputName">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="name"
+        name="name"
+        id="name"
+        placeholder="Enter your name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="email"
+        name="email"
+        id="email"
+        placeholder="Enter your email"
+      />
+    </div>
+    <button type="submit" class="btn btn-success" (click)="fetchData()">Submit</button>
+    <p style="text-align: center;">--------- or ---------</p>
+    <button type="submit"  style="background: white;color: green;"class="btn btn-success" (click)="newProfile()">Create Profile</button>
+  </form></div>

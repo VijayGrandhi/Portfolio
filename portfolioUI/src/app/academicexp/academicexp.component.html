@@ -1,0 +1,19 @@
+<div style="text-align: center; margin-top:20px;border: 6px solid green; margin:0px 20px">
+    <h2 style="font-size: 25px;
+    color: green;
+    font-weight: bold;
+    
+    padding: 10px;">Academic Experience</h2>
+<h1>{{usermodel?.Uname}}</h1>
+<div *ngFor="let item of workexp;let i=index" style="margin-top: 30px;margin-bottom: 30px;background-color: #b8b3b354;" >
+    <div style="display: flex;justify-content: space-between;">
+    <h3><h5>Project Name:</h5> {{item?.ProjectName}}</h3>
+    <h3> <h5>Company Name :</h5> {{item?.CompanyName}}</h3>
+    <h3><h5>Role :</h5> {{item?.designation}}</h3>
+    <h3><h5>Project Recognised :</h5> {{item?.duration}}</h3><br>
+    
+</div>
+<h5 style="display:flex;justify-content:center;padding-top:20px">Project Description:<p>{{item?.ProjectDescription}}</p></h5>
+ </div>
+ <h1 *ngIf="toggle">Academic Projects Not Uploaded</h1>
+</div>

@@ -1,0 +1,14 @@
+.navbar-collapse{
+    padding:20px;
+    justify-content: center;
+}
+li{
+    padding:0px 10px;
+}
+ a:hover{ 
+    border-bottom: 6px solid green; 
+} 
+a:active{
+    border-bottom: 6px solid green; 
+
+}

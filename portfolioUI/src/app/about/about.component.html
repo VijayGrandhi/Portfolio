@@ -1,0 +1,16 @@
+<div style="text-align: center; margin-top:20px;border: 6px solid green; margin:0px 20px">
+    <h2 style="font-size: 25px;
+    color: green;
+    font-weight: bold;
+    
+    padding: 10px;">Education</h2>
+<h1>{{usermodel?.Uname}}</h1>
+<div *ngFor="let item of education;let i=index" style="margin-top: 30px;margin-bottom: 30px;">
+    <div style="display: flex;justify-content: space-between;background-color: #b8b3b354">
+    <h3><h5>Degree:</h5> {{item?.degree}}</h3>
+    <h3> <h5>Major :</h5> {{item?.major}}</h3>
+    <h3><h5>College/School Name :</h5> {{item?.collegeName}}</h3>
+    <h3><h5>Graduation Year :</h5> {{item?.duration}}</h3>
+</div>
+ </div>
+</div>
