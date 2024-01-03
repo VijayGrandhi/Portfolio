@@ -1,17 +1,22 @@
 const express = require('express')
 const app = express()
-const port = 3000;
+const path = require('path');
+const port = process.env.PORT || 3000;
 const ud=require('./Services/userdataService')
 var cors = require('cors')
 const bodyparser= require('body-parser');
 app.use(cors())
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.json());
-
+//app.use(express.static('public', { extensions: ['html', 'js'] }));
+//app.use(express.static(path.join(__dirname, '/Users/vijayrahul/Portfolio/portfolioUI/dist')));
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../portfolioUI/dist/portfolio-ui/index.html'));
+// });
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-app.post('/fetchData',(req,res)=>{
+app.post('/api/fetchData',(req,res)=>{
     let uname=req.body.name;
     let email=req.body.email;
     ud.fetchData(uname,email).then((data)=>{
@@ -19,7 +24,7 @@ app.post('/fetchData',(req,res)=>{
         res.send(data);
     })
 })
-app.post('/upload',(req,res)=>{
+app.post('/api/upload',(req,res)=>{
     console.log(req.body.EducationExp.length);
     var educationInfo=req.body.EducationExp;
     var workExp=req.body.WorkExp;

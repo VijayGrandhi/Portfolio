@@ -1,4 +1,8 @@
 <div style="border: 6px solid green; margin-top:10px" *ngIf="index==1" class="details">
+  <input type="file" (change)="onFileSelected($event)">
+  <button (click)="onUpload()">Upload</button>
+    
+    
     <h2 style="font-size: 25px;
     color: green;
     font-weight: bold;

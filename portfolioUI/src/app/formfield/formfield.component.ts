@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import{HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { PdfReaderService } from '../services/pdfreader.service';
+
 
 @Component({
   selector: 'app-formfield',
@@ -9,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class FormfieldComponent implements OnInit {
   index=1;
+  selectedFile: File | null = null;
   Profile:any={
     name:'',
     emailID:'',
@@ -16,11 +20,14 @@ export class FormfieldComponent implements OnInit {
     address:'',
     description:'',
 }
+pdfText: string | null = null;
+
   educationExperience:any[]=[];
   workExperience:any[]=[];
   academicExperience:any[]=[];
   skills:any[]=[];
   skill='';
+ 
   workexp={
     ProjectName :'' ,
     ProjectDescription :'',
@@ -33,7 +40,7 @@ export class FormfieldComponent implements OnInit {
     major:'',
     collegeName:'',
   graduationYear:''};
-  constructor(private http:HttpClient,private router:Router) { }
+  constructor(private http:HttpClient,private router:Router ,public api:ApiService ,private pdfReaderService: PdfReaderService) { }
 
   ngOnInit(): void {
   }
@@ -78,7 +85,7 @@ export class FormfieldComponent implements OnInit {
     this.Profile.AcademicExp=this.academicExperience;
     this.Profile.WorkExp=this.workExperience;
     console.log(JSON.stringify(this.Profile));
-    this.http.post("http://localhost:3000/upload",this.Profile).subscribe((data)=>{
+    this.http.post(this.api.baseUrl+'/upload',this.Profile).subscribe((data)=>{
         console.log(data);
         this.Profile={
           name:'',
@@ -91,6 +98,43 @@ export class FormfieldComponent implements OnInit {
       })
              
   }
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      // Check if the selected file is a PDF
+      if (file.type !== 'application/pdf') {
+        //this.errorMessage = 'Please select a PDF file.';
+        this.selectedFile = null;
+      } else {
+        this.selectedFile = file;
+       // this.errorMessage = null;
+      }
+    }
+  }
+  onUpload(): void {
+    if (this.selectedFile) {
+      if (this.selectedFile && this.selectedFile.type === 'application/pdf') {
+        this.pdfReaderService.readPdf(this.selectedFile)
+          .then(text => {
+            this.pdfText = text;
+          })
+          .catch(error => {
+            console.error('Error reading PDF:', error);
+          });
+      } else {
+        console.error('Invalid file format. Please select a PDF file.');
+      }
+      // this.fileUploadService.uploadFile(this.selectedFile).subscribe(
+      //   response => {
+      //     console.log('File uploaded successfully:', response);
+      //   },
+      //   error => {
+      //     console.error('Error uploading file:', error);
+      //   }
+      //);
+    }
+  }
+  
   onEnter(event: any): void {
     if (event instanceof KeyboardEvent && event.key === 'Enter') {
       this.skills.push(this.skill);

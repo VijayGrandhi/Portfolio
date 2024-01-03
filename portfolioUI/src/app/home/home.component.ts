@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/services/data.service';
 import { UserModel } from '../model/user.model';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   name: string = '';
   email: string = '';
   usermodel:UserModel | void | undefined;
-  constructor( private router:Router,private http:HttpClient,private dataservice:DataService ) { 
+  constructor( private router:Router,private http:HttpClient,private dataservice:DataService ,public api:ApiService) { 
     var username=sessionStorage.getItem('name');
     console.log(username);
     if(username!=null || username==' ')
@@ -41,7 +42,7 @@ export class HomeComponent implements OnInit {
     userData.email=this.email;
     //sessionStorage.setItem('name',this.name);
     console.log(this.email);
-    this.http.post<UserModel>('http://localhost:3000/fetchData',userData).subscribe((data:UserModel)=>{
+    this.http.post<UserModel>(this.api.baseUrl+'/fetchData',userData).subscribe((data:UserModel)=>{
       console.log("fetchData:"+JSON.stringify(data.Uname));
       if( data.Uname != undefined || data.Uname !=null) {
       sessionStorage.setItem('name',this.name);

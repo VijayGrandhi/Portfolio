@@ -1,21 +1,21 @@
 const { query } = require('express')
 const mysql = require('mysql')
 const connection = mysql.createConnection({
-    host: 'database-1.cq2tdanrz2by.us-east-2.rds.amazonaws.com',
-    user: 'admin',
+   //  host: 'database-1.cq2tdanrz2by.us-east-2.rds.amazonaws.com',
+   host: 'localhost',
+       user: 'root',
     password: 'password',
     database: 'profilelist'
 })
 module.exports = {
     CheckUser: function (username) {
         return new Promise((resolve, reject) => {
-            // connection.connect();
-            let query = "select * from userprofile where Uname='" + username + "'";
+            let query = "select * from userprofile where Uname='"+username+"';";
             console.log(query);
             connection.query(query, (err, rows, fields) => {
                 if (err) {
-                    console.log(query);
-                    reject(err.message)
+                    console.log("error"+err);
+                    resolve(err.message)
                 }
                 else {
                     console.log(rows.length);
